@@ -1,0 +1,19 @@
+spring:
+  jpa:
+    database: POSTGRESQL
+    properties:
+      hibernate:
+        default_schema: resource_schema
+        highlight_sql: true
+        format_sql: true
+  datasource:
+    url: jdbc:postgresql://localhost:5432/resource_db?characterEncoding=utf8
+    username: resource_owner
+    password: abc
+    driver-class-name: org.postgresql.Driver
+  flyway:
+    schemas: resource_schema
+  servlet:
+    multipart:
+      max-file-size: 15MB
+      max-request-size: 15MB

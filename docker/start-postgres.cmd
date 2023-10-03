@@ -1,0 +1,1 @@
+docker build -t local-resource-db . && docker run --name local-resource-postgres -e POSTGRES_PASSWORD=whywhywhy -p 5432:5432 -d local-resource-db
