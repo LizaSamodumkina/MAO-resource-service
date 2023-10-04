@@ -17,3 +17,9 @@ spring:
     multipart:
       max-file-size: 15MB
       max-request-size: 15MB
+
+application:
+  api-schema: http
+  host: localhost
+  port: 8081
+  metadata-path: /songs

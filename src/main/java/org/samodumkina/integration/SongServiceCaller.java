@@ -2,6 +2,7 @@ package org.samodumkina.integration;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.tika.metadata.Metadata;
+import org.samodumkina.properties.ApplicationProperties;
 import org.samodumkina.service.metadata.MetadataField;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -14,8 +15,15 @@ public class SongServiceCaller {
 
   private static final Logger LOGGER = LoggerFactory.getLogger(SongServiceCaller.class);
 
+  private final ApplicationProperties applicationProperties;
+
+  public SongServiceCaller(ApplicationProperties applicationProperties) {
+    this.applicationProperties = applicationProperties;
+  }
+
   public void sendSongMetadata(Metadata metadata, Integer resourceId) {
-    String uri = "http://localhost:8081/songs";
+    String uri = "%s://%s:%s%s".formatted(applicationProperties.getApiSchema(), applicationProperties.getHost(),
+        applicationProperties.getPort(), applicationProperties.getMetadataPath());
     RestTemplate restTemplate = new RestTemplate();
     ResponseEntity<Object> responseEntity = restTemplate
         .postForEntity(uri, mapMetadata(metadata, resourceId), Object.class);
