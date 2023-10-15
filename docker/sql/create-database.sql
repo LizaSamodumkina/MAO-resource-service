@@ -1,8 +1,8 @@
 create user "resource_owner" nosuperuser nocreatedb nocreaterole encrypted password 'abc';
 
-create database resource_db;
+create database resource_db_a;
 
-alter database resource_db owner to resource_owner;
+alter database resource_db_a owner to resource_owner;
 
 \c resource_db;
 

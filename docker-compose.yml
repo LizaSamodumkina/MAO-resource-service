@@ -1,0 +1,25 @@
+version: '3.8'
+
+services:
+  song-db:
+    image: postgres:16.0
+    env_file: .env
+    environment:
+      POSTGRES_DB: $DB_NAME
+      POSTGRES_PASSWORD: $DB_NAME
+    ports:
+      - $DB_LOCAL_PORT:$DB_DOCKER_PORT
+    volumes:
+      - './docker/sql/create-database.sql:/docker-entrypoint-initdb.d/create-database.sql'
+  song-service:
+    depends_on:
+      - song-db
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    environment:
+      - SPRING_DATASOURCE_URL=$DATASOURCE_URL
+      - SONG_HOST=SONG_HOST
+      - SONG_PORT=SONG_PORT
+    ports:
+      - $SERVICE_LOCAL_PORT:$SERVICE_DOCKER_PORT

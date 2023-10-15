@@ -1,0 +1,5 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/resource_db?characterEncoding=utf8
+application:
+  host: localhost

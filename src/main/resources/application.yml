@@ -7,7 +7,7 @@ spring:
         highlight_sql: true
         format_sql: true
   datasource:
-    url: jdbc:postgresql://localhost:5432/resource_db?characterEncoding=utf8
+    url: ${SPRING_DATASOURCE_URL}
     username: resource_owner
     password: abc
     driver-class-name: org.postgresql.Driver
@@ -20,6 +20,6 @@ spring:
 
 application:
   api-schema: http
-  host: localhost
-  port: 8081
+  host: ${SONG_HOST}
+  port: ${SONG_PORT}
   metadata-path: /songs
