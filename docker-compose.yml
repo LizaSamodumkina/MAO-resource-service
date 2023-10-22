@@ -1,7 +1,7 @@
 version: '3.8'
 
 services:
-  song-db:
+  resource-db:
     image: postgres:16.0
     env_file: .env
     environment:
@@ -11,9 +11,9 @@ services:
       - $DB_LOCAL_PORT:$DB_DOCKER_PORT
     volumes:
       - './docker/sql/create-database.sql:/docker-entrypoint-initdb.d/create-database.sql'
-  song-service:
+  resource-service:
     depends_on:
-      - song-db
+      - resource-db
     build:
       context: ./
       dockerfile: Dockerfile
