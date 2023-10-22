@@ -16,15 +16,17 @@ public class SongServiceCaller {
   private static final Logger LOGGER = LoggerFactory.getLogger(SongServiceCaller.class);
 
   private final ApplicationProperties applicationProperties;
+  private final RestTemplate restTemplate;
 
-  public SongServiceCaller(ApplicationProperties applicationProperties) {
+  public SongServiceCaller(ApplicationProperties applicationProperties, RestTemplate restTemplate) {
     this.applicationProperties = applicationProperties;
+    this.restTemplate = restTemplate;
   }
 
   public void sendSongMetadata(Metadata metadata, Integer resourceId) {
-    String uri = "%s://%s:%s%s".formatted(applicationProperties.getApiSchema(), applicationProperties.getHost(),
-        applicationProperties.getPort(), applicationProperties.getMetadataPath());
-    RestTemplate restTemplate = new RestTemplate();
+    String uri = "%s://%s/%s/%s".formatted(applicationProperties.apiSchema(),
+        applicationProperties.gatewayName(), applicationProperties.songServiceName(),
+        applicationProperties.metadataPath());
     ResponseEntity<Object> responseEntity = restTemplate
         .postForEntity(uri, mapMetadata(metadata, resourceId), Object.class);
 

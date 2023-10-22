@@ -1,4 +1,6 @@
 spring:
+  application:
+    name: resource-service
   jpa:
     database: POSTGRESQL
     properties:
@@ -20,6 +22,9 @@ spring:
 
 application:
   api-schema: http
-  host: ${SONG_HOST}
-  port: ${SONG_PORT}
-  metadata-path: /songs
+  metadata-path: api/songs
+  gateway-name: proxy
+  song-service-name: song-service
+
+server:
+  port: 8090
